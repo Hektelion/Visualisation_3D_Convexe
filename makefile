@@ -47,9 +47,9 @@ test : $(OBJ)
 # REGLES AUTRES #
 #################
 
-.PHONY : info cleanall cleanobj cleanexec
+.PHONY : info cleanall cleanobj cleanexec cleantest cleanobjtest
 
-cleanall : cleanobj cleanexec
+cleanall : cleanobj cleanexec cleantest cleanobjtest
 
 cleanobj :
 	@echo "suppression des objets"
@@ -62,6 +62,10 @@ cleanexec :
 cleantest :
 	@echo "suppression de l'executable de test"
 	@make --directory=./test cleanexec
+
+cleanobjtest :
+	@echo "suppression des objets test"
+	@make --directory=./test cleanobj
 
 print-% :
 	@echo $* = $($*)

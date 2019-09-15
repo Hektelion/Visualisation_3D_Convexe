@@ -10,7 +10,7 @@ CC = gcc
 CFLAGS = -W -Wall
 LDFLAGS =
 
-EXEC = visualisation3D
+EXEC = visualisation3D_test
 
 SRC := $(wildcard ./src/*.c)
 OBJ := $(patsubst ./src/%.c,./obj/%.o,$(SRC))
@@ -19,20 +19,10 @@ OBJ := $(patsubst ./src/%.c,./obj/%.o,$(SRC))
 # REGLES DE COMPILATION #
 #########################
 
-all : programm test
-
-info :
-	@echo "Compiler le programme --> make programm"
-	@echo "Compiler les tests --> make test"
-	@echo "Nettoyer les fichier générés --> make cleanall"
-	@echo "Supprimer l'executable --> make cleanexec"
-	@echo "Supprimer les fichiers objets --> make cleanobj"
+all : programm
 
 programm : $(OBJ)
 	$(CC) -o $(EXEC) $(OBJ) $(LDFLAGS) $(CFLAGS)
-
-test : $(OBJ)
-	@make --directory=./test all
 
 ./obj/%.o : ./src/%.c
 	$(CC) -o $@ -c $^
@@ -46,11 +36,9 @@ test : $(OBJ)
 cleanall : cleanobj cleanexec
 
 cleanobj :
-	@echo "suppression des objets"
 	@rm -f ./obj/*.o
 
 cleanexec :
-	@echo "suppression de l'executable"
 	@rm -f ./$(EXEC)
 
 print-% :
