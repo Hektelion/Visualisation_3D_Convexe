@@ -1,0 +1,4 @@
+# Ignore les executables et fichier objets
+
+visualisation3D
+*.o
