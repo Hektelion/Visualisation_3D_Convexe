@@ -4,9 +4,15 @@
 
 #include <stdio.h>
 
+#include "../header/system.h" //Prototype des fonctions
+
 int main()
 {
-    printf("test\n");
+    initialization();
+
+    //PROGRAM
+
+    termination();
 
     return 0;
 }

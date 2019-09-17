@@ -8,7 +8,12 @@
 
 CC = gcc
 CFLAGS = -W -Wall
-LDFLAGS = `sdl-config --cflags --libs` 
+LDFLAGS = `sdl2-config --cflags --libs` -lSDL2_ttf -lSDL2_image
+DEBUG = no
+
+ifeq ($(DEBUG), yes)
+	CFLAGS += -g
+endif
 
 EXEC = visualisation3D
 
@@ -35,7 +40,7 @@ info :
 	@echo "Supprimer les fichiers objets    --> make cleanobj"
 
 programm : $(OBJ)
-	$(CC) -o $(EXEC) $(OBJ) $(CFLAGS) $(LDFLAGS)
+	$(CC) -o $(EXEC) $^ $(CFLAGS) $(LDFLAGS)
 
 test : $(OBJ)
 	@make --directory=./test all
