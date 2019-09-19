@@ -20,6 +20,7 @@ static void init_controller();
 
 static void init_system();
 static void init_subsystem();
+
 int initialization();
 
 //Fermeture de l'interface
@@ -35,6 +36,7 @@ static void close_controller();
 
 static void close_system();
 static void close_subsystem();
+
 int termination();
 
 #endif //SYSTEM_H
