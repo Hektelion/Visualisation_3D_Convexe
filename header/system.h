@@ -4,38 +4,40 @@
     Réalisé par BESSAI Sofiane
 */
 
+#include <SDL2/SDL.h>
+
 #ifndef SYSTEM_H
 #define SYSTEM_H
 
 //Initialisation de l'interface
 
-static void init_SDL();
-static void init_SDL_TTF();
-static void init_SDL_IMAGE();
+void init_SDL();
+void init_SDL_TTF();
+void init_SDL_IMAGE();
 
-static void init_timer();
-static void init_audio();
-static void init_events();
-static void init_controller();
+void init_timer();
+void init_audio();
+void init_events();
+void init_controller();
 
-static void init_system();
-static void init_subsystem();
+void init_system();
+void init_subsystem();
 
 int initialization();
 
 //Fermeture de l'interface
 
-static void close_SDL();
-static void close_SDL_TTF();
-static void close_SDL_IMAGE();
+void close_SDL();
+void close_SDL_TTF();
+void close_SDL_IMAGE();
 
-static void close_timer();
-static void close_audio();
-static void close_events();
-static void close_controller();
+void close_timer();
+void close_audio();
+void close_events();
+void close_controller();
 
-static void close_system();
-static void close_subsystem();
+void close_system();
+void close_subsystem();
 
 int termination();
 

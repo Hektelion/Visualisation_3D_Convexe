@@ -5,17 +5,19 @@
 #include "../header/system.h" //Prototype des fonctions
 #include "../header/constant.h" //Constante
 
+#include "../header/draw.h" //Constante
+
 #include <stdlib.h> //EXIT_SUCCESS et EXIT_FAILURE
 #include <SDL2/SDL.h> //Fonctions d'ouverture et fermeture de SDL et ces sous-systemes
 #include <SDL2/SDL_ttf.h> //
 #include <SDL2/SDL_image.h> //
 
-//Initialisation de l'interface
+//Initialisation des bibliotheque
 
 /*
 
 */
-static void init_SDL()
+void init_SDL()
 {
     if(LOG_INIT_SYSTEM) fprintf(stdout, "Initializing SDL library...\n");
     if(SDL_Init(SDL_INIT_VIDEO) != 0)
@@ -29,7 +31,7 @@ static void init_SDL()
 /*
 
 */
-static void init_SDL_TTF()
+void init_SDL_TTF()
 {
 	if(LOG_INIT_SYSTEM) fprintf(stdout, "Initializing SDL_ttf library...\n");
     if(TTF_Init() != 0)
@@ -43,7 +45,7 @@ static void init_SDL_TTF()
 /*
 
 */
-static void init_SDL_IMAGE()
+void init_SDL_IMAGE()
 {
 	fprintf(stderr, "WARNING !!!! : init_SDL_IMAGE not implemented\n");
 }
@@ -51,7 +53,7 @@ static void init_SDL_IMAGE()
 /*
 
 */
-static void init_timer()
+void init_timer()
 {
 	if(LOG_INIT_SYSTEM) fprintf(stdout, "Initializing subsystem SDL Timer...\n");
 	if(SDL_InitSubSystem(SDL_INIT_TIMER) != 0)
@@ -65,7 +67,7 @@ static void init_timer()
 /*
 
 */
-static void init_audio()
+void init_audio()
 {
 	if(LOG_INIT_SYSTEM) fprintf(stdout, "Initializing subsystem SDL Audio...\n");
 	if(SDL_InitSubSystem(SDL_INIT_AUDIO) != 0)
@@ -79,7 +81,7 @@ static void init_audio()
 /*
 
 */
-static void init_events()
+void init_events()
 {
 	if(LOG_INIT_SYSTEM) fprintf(stdout, "Initializing subsystem SDL Events...\n");
 	if(SDL_InitSubSystem(SDL_INIT_EVENTS) != 0)
@@ -93,7 +95,7 @@ static void init_events()
 /*
 
 */
-static void init_controller()
+void init_controller()
 {
 	if(LOG_INIT_SYSTEM) fprintf(stdout, "Initializing subsystem SDL Controller...\n");
 	if(SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER) != 0)
@@ -107,7 +109,7 @@ static void init_controller()
 /*
 
 */
-static void init_system()
+void init_system()
 {
 	init_SDL();
 	init_SDL_TTF();
@@ -119,7 +121,7 @@ static void init_system()
 /*
 
 */
-static void init_subsystem()
+void init_subsystem()
 {
 	init_timer();
 	init_audio();
@@ -137,17 +139,21 @@ int initialization()
 	init_system();
 	init_subsystem();
 
+	create_window();
+
+	create_renderer();
+
 	if(LOG_INIT_SYSTEM) fprintf(stdout, "All system initialized\n");
 
 	return EXIT_SUCCESS;
 }
 
-//Fermeture de l'interface
+//Fermeture des bibliotheque
 
 /*
 
 */
-static void close_SDL()
+void close_SDL()
 {
 	if(LOG_INIT_SYSTEM) fprintf(stdout, "Closing librairy SDL\n");
 	SDL_Quit();
@@ -156,7 +162,7 @@ static void close_SDL()
 /*
 
 */
-static void close_SDL_TTF()
+void close_SDL_TTF()
 {
 	if(LOG_INIT_SYSTEM) fprintf(stdout, "Closing librairy SDL_ttf\n");
 	TTF_Quit();
@@ -165,7 +171,7 @@ static void close_SDL_TTF()
 /*
 
 */
-static void close_SDL_IMAGE()
+void close_SDL_IMAGE()
 {
 	//if(LOG_INIT_SYSTEM) fprintf(stdout, "close_SDL_IMAGE not implemented\n");
 	if(LOG_INIT_SYSTEM) fprintf(stdout, "Closing librairy SDL_image\n");
@@ -175,7 +181,7 @@ static void close_SDL_IMAGE()
 /*
 
 */
-static void close_timer()
+void close_timer()
 {
 	if(LOG_INIT_SYSTEM) fprintf(stdout, "Closing subsystem SDL_timer\n");
 	SDL_QuitSubSystem(SDL_INIT_TIMER);
@@ -184,7 +190,7 @@ static void close_timer()
 /*
 
 */
-static void close_audio()
+void close_audio()
 {
 	if(LOG_INIT_SYSTEM) fprintf(stdout, "Closing subsystem SDL_audio\n");
 	SDL_QuitSubSystem(SDL_INIT_AUDIO);
@@ -193,7 +199,7 @@ static void close_audio()
 /*
 
 */
-static void close_events()
+void close_events()
 {
 	if(LOG_INIT_SYSTEM) fprintf(stdout, "Closing subsystem SDL_events\n");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
@@ -202,7 +208,7 @@ static void close_events()
 /*
 
 */
-static void close_controller()
+void close_controller()
 {
 	if(LOG_INIT_SYSTEM) fprintf(stdout, "Closing subsystem SDL_controller\n");
 	SDL_QuitSubSystem(SDL_INIT_GAMECONTROLLER);
@@ -211,7 +217,7 @@ static void close_controller()
 /*
 
 */
-static void close_system()
+void close_system()
 {
 	close_SDL_IMAGE();
 	close_SDL_TTF();
@@ -223,7 +229,7 @@ static void close_system()
 /*
 
 */
-static void close_subsystem()
+void close_subsystem()
 {
 	close_timer();
 	close_audio();
@@ -238,6 +244,9 @@ static void close_subsystem()
 */
 int termination()
 {
+	destroy_renderer();
+	destroy_window();
+
 	close_subsystem();
 	close_system();
 

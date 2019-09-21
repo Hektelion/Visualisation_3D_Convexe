@@ -10,7 +10,7 @@ CC = gcc
 CFLAGS = -W -Wall
 LDFLAGS =
 
-EXEC = visualisation3D_test
+EXEC = ../visualisation3D_test
 
 SRC := $(wildcard ./src/*.c)
 OBJ := $(patsubst ./src/%.c,./obj/%.o,$(SRC))
@@ -39,7 +39,7 @@ cleanobj :
 	@rm -f ./obj/*.o
 
 cleanexec :
-	@rm -f ./$(EXEC)
+	@rm -f $(EXEC)
 
 print-% :
 	@echo $* = $($*)
